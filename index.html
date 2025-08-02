@@ -1,112 +1,80 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sumwise – AI Audio Summaries</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f8f9fb;
-      color: #111;
-    }
+<section id="audio-tools">
+  <h2>Try It Now</h2>
 
-    header {
-      background-color: #ffffff;
-      padding: 80px 20px 60px;
-      text-align: center;
-    }
+  <!-- File upload -->
+  <label><strong>Upload Audio</strong></label><br />
+  <input type="file" id="audioUpload" accept="audio/*" />
+  <br><br>
 
-    header h1 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-    }
+  <!-- Audio recording -->
+  <button id="startRecord">🎙️ Start Recording</button>
+  <button id="stopRecord" disabled>⏹ Stop</button>
 
-    header p {
-      font-size: 1.2rem;
-      color: #444;
-      margin: 10px 0 20px;
-    }
+  <!-- Output -->
+  <p id="status"></p>
+  <pre id="summaryBox" style="white-space:pre-wrap;"></pre>
+</section>
 
-    .cta {
-      background-color: #3a82f7;
-      color: white;
-      padding: 12px 24px;
-      text-decoration: none;
-      font-weight: 600;
-      border-radius: 6px;
-      display: inline-block;
-      transition: background-color 0.3s ease;
-    }
+<script>
+  const startBtn = document.getElementById("startRecord");
+  const stopBtn = document.getElementById("stopRecord");
+  const audioUpload = document.getElementById("audioUpload");
+  const status = document.getElementById("status");
+  const summaryBox = document.getElementById("summaryBox");
 
-    .cta:hover {
-      background-color: #236be0;
-    }
+  let mediaRecorder;
+  let audioChunks = [];
 
-    section {
-      padding: 60px 20px;
-      max-width: 800px;
-      margin: auto;
-    }
+  // Upload file logic
+  audioUpload.addEventListener("change", async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
 
-    section h2 {
-      font-size: 2rem;
-      margin-bottom: 30px;
-      text-align: center;
-    }
+    status.textContent = "Processing upload...";
+    const formData = new FormData();
+    formData.append("audio", file);
 
-    .steps, .pricing {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
+    const res = await fetch("/api/summarize", {
+      method: "POST",
+      body: formData,
+    });
 
-    .step, .tier {
-      background: white;
-      padding: 18px 20px;
-      border-radius: 10px;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.04);
-      font-size: 1rem;
-    }
+    const data = await res.json();
+    summaryBox.textContent = data.summary || "No summary generated.";
+    status.textContent = "Done.";
+  });
 
-    footer {
-      background-color: #fff;
-      text-align: center;
-      padding: 20px;
-      font-size: 0.9rem;
-      color: #777;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>Sumwise</h1>
-    <p>Turn voice notes into clear, AI-generated summaries — instantly.</p>
-    <a class="cta" href="#">Join the Waitlist</a>
-  </header>
+  // Recording logic
+  startBtn.onclick = async () => {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    mediaRecorder = new MediaRecorder(stream);
+    audioChunks = [];
 
-  <section>
-    <h2>How It Works</h2>
-    <div class="steps">
-      <div class="step"><strong>1.</strong> Upload or record audio.</div>
-      <div class="step"><strong>2.</strong> AI transcribes and summarizes it.</div>
-      <div class="step"><strong>3.</strong> Receive a clean, structured summary in seconds.</div>
-    </div>
-  </section>
+    mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
+    mediaRecorder.onstop = async () => {
+      const blob = new Blob(audioChunks, { type: 'audio/webm' });
+      const formData = new FormData();
+      formData.append("audio", blob, "recording.webm");
 
-  <section>
-    <h2>Pricing</h2>
-    <div class="pricing">
-      <div class="tier"><strong>Free –</strong> Upload up to 3 audio notes per month.</div>
-      <div class="tier"><strong>Pro –</strong> $9/month for unlimited summaries and faster processing.</div>
-    </div>
-  </section>
+      status.textContent = "Processing recording...";
+      const res = await fetch("/api/summarize", {
+        method: "POST",
+        body: formData,
+      });
 
-  <footer>
-    © 2025 Sumwise. All rights reserved.
-  </footer>
-</body>
-</html>
+      const data = await res.json();
+      summaryBox.textContent = data.summary || "No summary generated.";
+      status.textContent = "Done.";
+    };
+
+    mediaRecorder.start();
+    startBtn.disabled = true;
+    stopBtn.disabled = false;
+  };
+
+  stopBtn.onclick = () => {
+    mediaRecorder.stop();
+    startBtn.disabled = false;
+    stopBtn.disabled = true;
+  };
+</script>
