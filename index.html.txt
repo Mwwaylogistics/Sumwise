@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sumwise – AI Audio Summaries</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f9fb;
+      color: #111;
+    }
+    header {
+      background-color: #ffffff;
+      padding: 60px 20px;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+    header p {
+      font-size: 1.2rem;
+      color: #444;
+    }
+    .cta {
+      background-color: #3a82f7;
+      color: white;
+      padding: 12px 24px;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 6px;
+      display: inline-block;
+      margin-top: 20px;
+    }
+    section {
+      padding: 40px 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+    section h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .steps, .pricing {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .step, .tier {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+    .step h3, .tier h3 {
+      margin-top: 0;
+    }
+    .footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Turn Hours of Audio into Minutes of Insight</h1>
+    <p>Upload your meeting, memo, or call recording. Sumwise delivers a clean, actionable summary in minutes.</p>
+    <a href="https://tally.so/r/n9Y6YQ" class="cta">Try It Free</a>
+  </header>
+
+  <section>
+    <h2>How It Works</h2>
+    <div class="steps">
+      <div class="step">
+        <h3>1. Upload Your Audio</h3>
+        <p>Drop your voice memo or meeting recording into our secure upload form.</p>
+      </div>
+      <div class="step">
+        <h3>2. AI Transcribes and Summarizes</h3>
+        <p>Our system uses Whisper + GPT-4 to create a concise, bullet-point summary.</p>
+      </div>
+      <div class="step">
+        <h3>3. Get Your Summary</h3>
+        <p>We send your polished summary directly to your inbox – fast, clean, and actionable.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing">
+    <h2>Pricing</h2>
+    <div class="pricing">
+      <div class="tier">
+        <h3>Starter</h3>
+        <p>1 summary/month</p>
+        <p><strong>Free</strong></p>
+      </div>
+      <div class="tier">
+        <h3>Pro</h3>
+        <p>Up to 20 summaries/month</p>
+        <p><strong>$9/month</strong></p>
+      </div>
+      <div class="tier">
+        <h3>Unlimited</h3>
+        <p>Unlimited summaries + white-label features</p>
+        <p><strong>$49/month</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>FAQ</h2>
+    <div class="step">
+      <h3>What file formats do you accept?</h3>
+      <p>We accept MP3, M4A, and WAV audio files for now.</p>
+    </div>
+    <div class="step">
+      <h3>How long does it take to receive my summary?</h3>
+      <p>Typically within 5–15 minutes, depending on audio length.</p>
+    </div>
+    <div class="step">
+      <h3>Can I use this for team meetings?</h3>
+      <p>Yes! Our Pro and Unlimited plans are ideal for team or agency use.</p>
+    </div>
+  </section>
+
+  <div class="footer">
+    &copy; 2025 Sumwise. All rights reserved. | Powered by AI
+  </div>
+</body>
+</html>
