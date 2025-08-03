@@ -5,36 +5,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Sumwise</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
       background: linear-gradient(180deg, #FF61A6, #5F7BFF);
-      color: #0b0b28;
+      color: #111827;
       text-align: center;
+      min-height: 100vh;
     }
 
     .hero {
       padding: 60px 20px 40px;
+      color: #fff;
     }
 
     .logo {
-      height: 60px;
+      height: 64px;
       margin-bottom: 20px;
     }
 
     h1 {
       font-size: 2.5rem;
       font-weight: bold;
-      margin: 0;
+      margin: 10px 0 10px;
     }
 
-    p.tagline {
+    .tagline {
       font-size: 1.2rem;
-      margin: 10px 0 30px;
-      color: #fff;
+      max-width: 500px;
+      margin: auto;
     }
 
     .cta-button {
+      margin-top: 24px;
       background-color: #34D399;
       color: white;
       border: none;
@@ -51,30 +58,29 @@
     }
 
     section {
-      background-color: #fefefe;
+      background-color: #ffffff;
       border-radius: 25px;
       padding: 40px 20px;
       margin: 30px auto;
       width: 90%;
       max-width: 600px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
     }
 
-    section h2 {
+    h2 {
       font-size: 1.8rem;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
       color: #0b0b28;
     }
 
     .card {
-      background: white;
+      background: #f9fafb;
       border-radius: 12px;
       padding: 14px 20px;
       text-align: left;
       margin: 10px auto;
       max-width: 480px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-      font-size: 0.95rem;
+      font-size: 1rem;
     }
 
     .card b {
@@ -85,6 +91,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      gap: 12px;
     }
 
     .upload-area input[type="file"] {
@@ -93,7 +100,7 @@
 
     .btn {
       padding: 10px 16px;
-      margin: 5px;
+      margin: 0 4px;
       border: none;
       border-radius: 6px;
       cursor: pointer;
@@ -111,12 +118,13 @@
     }
 
     .summary-output {
-      background-color: #f9fafb;
+      background-color: #f3f4f6;
       padding: 12px;
       border-radius: 8px;
       margin-top: 20px;
       width: 100%;
       max-width: 480px;
+      font-size: 0.95rem;
     }
 
     footer {
@@ -130,7 +138,7 @@
 <body>
 
   <div class="hero">
-    <img src="https://uploads-ssl.webflow.com/5fbbd1b30f4d9cbef20d8f8f/5fbc45f55f06d73c6a4b2376_logo-circle.svg" alt="Sumwise Logo" class="logo"/>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Google_Material_Design_Icon.svg" alt="Sumwise Logo" class="logo"/>
     <h1>Sumwise</h1>
     <p class="tagline">Turn voice notes into clear, AI-generated summaries — instantly.</p>
     <button class="cta-button">Join the Waitlist</button>
@@ -154,10 +162,12 @@
     <div class="upload-area">
       <label><b>Upload Audio</b></label>
       <input type="file" id="audioFile" accept="audio/*" />
-      <button class="btn btn-start" id="startBtn">Start Recording</button>
-      <button class="btn btn-stop" id="stopBtn" disabled>Stop</button>
+      <div>
+        <button class="btn btn-start" id="startBtn">Start Recording</button>
+        <button class="btn btn-stop" id="stopBtn" disabled>Stop</button>
+      </div>
     </div>
-    <div class="summary-output" id="summaryBox">AI-generated summary will appear here.</div>
+    <div class="summary-output" id="summaryBox">No summary generated.</div>
   </section>
 
   <footer>
