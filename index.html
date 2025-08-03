@@ -2,85 +2,108 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sumwise – AI Audio Summaries</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sumwise – AI Summarized Voice Notes</title>
   <style>
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f8f9fb;
       margin: 0;
       padding: 0;
-      background-color: #f9fafb;
-      color: #111;
-    }
-
-    header {
-      background-color: #ffffff;
-      padding: 60px 20px;
       text-align: center;
     }
 
-    header h1 {
-      font-size: 2.5rem;
+    header {
+      padding: 60px 20px 40px;
+      background: #fff;
+    }
+
+    h1 {
+      font-size: 2.4rem;
       margin-bottom: 10px;
     }
 
-    header p {
-      font-size: 1.2rem;
-      color: #444;
+    p {
+      color: #555;
+      font-size: 1rem;
+      margin: 0 0 20px;
     }
 
     .cta {
-      background-color: #3a82f7;
+      display: inline-block;
+      background: #3b82f6;
       color: white;
-      padding: 12px 24px;
+      padding: 10px 18px;
+      border-radius: 6px;
       text-decoration: none;
       font-weight: 600;
-      border-radius: 6px;
-      display: inline-block;
-      margin-top: 20px;
     }
 
     section {
       padding: 40px 20px;
-      max-width: 800px;
-      margin: auto;
     }
 
-    section h2 {
-      font-size: 2rem;
+    h2 {
+      font-size: 1.5rem;
       margin-bottom: 20px;
-      text-align: center;
     }
 
-    .steps, .pricing {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
+    .steps, .pricing, .recorder {
+      max-width: 600px;
+      margin: 0 auto;
+      display: grid;
+      gap: 12px;
     }
 
-    .step, .tier {
+    .step, .price, .recorder-box {
       background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      padding: 14px 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      text-align: left;
     }
 
-    footer {
-      background-color: #ffffff;
-      text-align: center;
+    .footer {
+      font-size: 0.85rem;
       padding: 20px;
+      color: #999;
+    }
+
+    #startRecord, #stopRecord {
+      margin: 10px 5px;
+      padding: 8px 12px;
       font-size: 0.9rem;
-      color: #888;
+      border: none;
+      border-radius: 4px;
+      background: #e5e7eb;
+      cursor: pointer;
     }
 
-    button {
-      cursor: pointer;
+    #startRecord:enabled {
+      background: #3b82f6;
+      color: white;
+    }
+
+    #stopRecord:enabled {
+      background: #ef4444;
+      color: white;
+    }
+
+    #summaryBox {
+      background: #fff;
+      padding: 12px;
+      margin-top: 12px;
+      border-radius: 6px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+      min-height: 40px;
+    }
+
+    input[type="file"] {
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
-
   <header>
     <h1>Sumwise</h1>
     <p>Turn voice notes into clear, AI-generated summaries — instantly.</p>
@@ -99,33 +122,108 @@
   <section>
     <h2>Pricing</h2>
     <div class="pricing">
-      <div class="tier"><strong>Free</strong> – Upload up to 3 audio notes per month.</div>
-      <div class="tier"><strong>Pro</strong> – $9/month for unlimited summaries and faster processing.</div>
+      <div class="price"><strong>Free</strong> – Upload up to 3 audio notes per month.</div>
+      <div class="price"><strong>Pro</strong> – $9/month for unlimited summaries and faster processing.</div>
     </div>
   </section>
 
-  <section id="audio-tools" style="padding: 4rem 1rem; background-color: #f9fafb; text-align: center;">
-    <h2 style="font-size: 2rem; font-weight: 700; margin-bottom: 1rem;">Try It Now</h2>
-
-    <div style="margin-bottom: 1.5rem;">
-      <label style="font-weight: bold;">Upload Audio</label><br />
-      <input type="file" id="audioUpload" accept="audio/*" />
-    </div>
-
-    <div style="margin-bottom: 1.5rem;">
-      <button id="startRecord" style="padding: 0.5rem 1rem; margin-right: 0.5rem;">🎙️ Start Recording</button>
-      <button id="stopRecord" disabled style="padding: 0.5rem 1rem;">⏹ Stop</button>
-    </div>
-
-    <div>
-      <p id="status" style="color: gray;"></p>
-      <pre id="summaryBox" style="background: #fff; padding: 1rem; border-radius: 0.5rem; text-align: left; max-width: 600px; margin: 1rem auto; white-space: pre-wrap;"></pre>
+  <section>
+    <h2>Try It Now</h2>
+    <div class="recorder">
+      <div class="recorder-box">
+        <strong>Upload Audio</strong><br />
+        <input type="file" id="audioUpload" accept="audio/*" />
+        <br />
+        <button id="startRecord">Start Recording</button>
+        <button id="stopRecord" disabled>Stop</button>
+        <p id="status"></p>
+        <div id="summaryBox">AI-generated summary will appear here.</div>
+      </div>
     </div>
   </section>
 
-  <footer>
+  <footer class="footer">
     © 2025 Sumwise. All rights reserved.
   </footer>
 
+  <script>
+    const startBtn = document.getElementById("startRecord");
+    const stopBtn = document.getElementById("stopRecord");
+    const audioUpload = document.getElementById("audioUpload");
+    const status = document.getElementById("status");
+    const summaryBox = document.getElementById("summaryBox");
+
+    let mediaRecorder;
+    let audioChunks = [];
+
+    startBtn.onclick = async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        mediaRecorder = new MediaRecorder(stream);
+        audioChunks = [];
+
+        mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
+        mediaRecorder.onstop = async () => {
+          const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+          const formData = new FormData();
+          formData.append("audio", audioBlob, "recording.webm");
+
+          status.textContent = "Processing recording...";
+
+          try {
+            const res = await fetch("/api/summarize", {
+              method: "POST",
+              body: formData
+            });
+
+            const data = await res.json();
+            summaryBox.textContent = data.summary || "No summary generated.";
+            status.textContent = "Done.";
+          } catch (err) {
+            status.textContent = "Error: Failed to send audio to server.";
+            console.error(err);
+          }
+        };
+
+        mediaRecorder.start();
+        startBtn.disabled = true;
+        stopBtn.disabled = false;
+        status.textContent = "Recording...";
+      } catch (err) {
+        status.textContent = "Error: Microphone access denied or not available.";
+        console.error(err);
+      }
+    };
+
+    stopBtn.onclick = () => {
+      mediaRecorder.stop();
+      startBtn.disabled = false;
+      stopBtn.disabled = true;
+    };
+
+    audioUpload.onchange = async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const formData = new FormData();
+      formData.append("audio", file);
+
+      status.textContent = "Processing upload...";
+
+      try {
+        const res = await fetch("/api/summarize", {
+          method: "POST",
+          body: formData
+        });
+
+        const data = await res.json();
+        summaryBox.textContent = data.summary || "No summary generated.";
+        status.textContent = "Done.";
+      } catch (err) {
+        status.textContent = "Error: Failed to send file to server.";
+        console.error(err);
+      }
+    };
+  </script>
 </body>
 </html>
