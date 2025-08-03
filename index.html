@@ -11,60 +11,60 @@
     <link rel="icon" href="https://emojiapi.dev/api/v1/brain/48.png" />
   </head>
   <body class="bg-gray-50 text-gray-800 font-sans">
-    <!-- Header -->
-    <header class="text-center py-10">
-      <div class="text-4xl font-bold flex justify-center items-center space-x-2">
+    <!-- Hero -->
+    <header class="bg-gradient-to-br from-purple-600 to-blue-500 py-14 text-white text-center shadow-md">
+      <div class="text-5xl font-extrabold flex justify-center items-center space-x-2">
         <span>🧠</span><span>Sumwise</span>
       </div>
-      <p class="mt-4 text-lg text-gray-600">
-        Your voice notes, instantly summarized by AI.
-      </p>
+      <p class="mt-4 text-lg">Your voice notes, instantly summarized by AI.</p>
       <a
         href="#try"
-        class="mt-6 inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-full transition"
+        class="mt-6 inline-block bg-white text-blue-600 font-semibold px-6 py-2 rounded-full shadow hover:bg-gray-100 transition"
       >
         Try It Free
       </a>
     </header>
 
     <!-- How It Works -->
-    <section class="bg-white py-12">
-      <div class="max-w-2xl mx-auto text-center">
-        <h2 class="text-2xl font-bold mb-6">How It Works</h2>
-        <ol class="space-y-4 text-left">
-          <li class="bg-gray-100 px-4 py-3 rounded shadow-sm">
-            <strong>1.</strong> Upload or record your voice note.
-          </li>
-          <li class="bg-gray-100 px-4 py-3 rounded shadow-sm">
-            <strong>2.</strong> AI transcribes and summarizes it.
-          </li>
-          <li class="bg-gray-100 px-4 py-3 rounded shadow-sm">
-            <strong>3.</strong> Get your clear, structured summary instantly.
-          </li>
-        </ol>
+    <section class="py-16 bg-white">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl font-bold mb-8">How It Works</h2>
+        <div class="grid gap-6 sm:grid-cols-3">
+          <div class="bg-gray-100 p-5 rounded-xl shadow-sm">
+            <h3 class="font-semibold mb-2">1. Upload or Record</h3>
+            <p class="text-sm text-gray-600">Capture your voice note or upload an audio file.</p>
+          </div>
+          <div class="bg-gray-100 p-5 rounded-xl shadow-sm">
+            <h3 class="font-semibold mb-2">2. AI Transcribes + Summarizes</h3>
+            <p class="text-sm text-gray-600">Whisper + GPT-4 generate clear summaries fast.</p>
+          </div>
+          <div class="bg-gray-100 p-5 rounded-xl shadow-sm">
+            <h3 class="font-semibold mb-2">3. Done in Seconds</h3>
+            <p class="text-sm text-gray-600">Get your structured summary instantly.</p>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- Pricing -->
-    <section class="py-12 bg-gray-50">
+    <section class="py-16 bg-gray-50">
       <div class="max-w-2xl mx-auto text-center">
-        <h2 class="text-2xl font-bold mb-6">Pricing</h2>
+        <h2 class="text-3xl font-bold mb-8">Pricing</h2>
         <div class="space-y-4">
-          <div class="bg-white p-4 rounded shadow-sm">
-            <strong>Free –</strong> Upload up to 3 audio notes/month.
+          <div class="bg-white p-4 rounded-xl shadow border border-gray-200">
+            <strong>Free</strong> – Upload up to 3 audio notes per month.
           </div>
-          <div class="bg-white p-4 rounded shadow-sm">
-            <strong>Pro –</strong> $9/month for unlimited summaries + priority speed.
+          <div class="bg-white p-4 rounded-xl shadow border border-blue-200">
+            <strong>Pro</strong> – $9/month for unlimited summaries and faster processing.
           </div>
         </div>
       </div>
     </section>
 
     <!-- Try It Now -->
-    <section id="try" class="py-12 bg-white">
+    <section id="try" class="py-16 bg-white">
       <div class="max-w-xl mx-auto text-center">
-        <h2 class="text-2xl font-bold mb-4">Try It Now</h2>
-        <p class="mb-4 font-semibold">Upload Audio</p>
+        <h2 class="text-3xl font-bold mb-6">Try It Now</h2>
 
         <input
           id="audioFile"
@@ -73,10 +73,10 @@
           class="mb-4 block mx-auto"
         />
 
-        <div class="mb-4">
+        <div class="mb-4 space-x-2">
           <button
             id="startBtn"
-            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded mr-2"
+            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded"
           >
             Start Recording
           </button>
@@ -90,6 +90,7 @@
         </div>
 
         <p id="status" class="text-sm text-gray-600 mb-2">Ready to record...</p>
+
         <div
           id="summaryResult"
           class="mt-4 bg-gray-100 p-4 rounded text-left shadow-sm text-sm"
@@ -100,8 +101,8 @@
     </section>
 
     <!-- Footer -->
-    <footer class="text-center py-6 text-gray-400 text-sm">
-      © 2025 Sumwise. Built with 💙 for clarity.
+    <footer class="text-center py-8 text-sm text-gray-400">
+      © 2025 <span class="font-medium text-blue-500">Sumwise</span>. Built with 💙 for clarity.
     </footer>
 
     <!-- Script -->
