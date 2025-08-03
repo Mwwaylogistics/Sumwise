@@ -1,203 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sumwise – AI Summaries</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f9fafb;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-    }
-
-    header {
-      padding: 4rem 1rem 2rem;
-    }
-
-    h1 {
-      font-size: 2rem;
-      font-weight: bold;
-      margin-bottom: 0.5rem;
-    }
-
-    p {
-      color: #4b5563;
-      margin-bottom: 1.5rem;
-    }
-
-    .button {
-      background-color: #3b82f6;
-      color: white;
-      padding: 0.5rem 1rem;
-      border-radius: 0.375rem;
-      text-decoration: none;
-      font-weight: bold;
-      border: none;
-      cursor: pointer;
-    }
-
-    section {
-      padding: 2rem 1rem;
-    }
-
-    .section-title {
-      font-size: 1.5rem;
-      font-weight: bold;
-      margin-bottom: 1.5rem;
-    }
-
-    .card {
-      background-color: white;
-      margin: 0 auto 1rem;
-      max-width: 500px;
-      padding: 1rem;
-      border-radius: 0.5rem;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-      text-align: left;
-    }
-
-    .card strong {
-      font-weight: bold;
-    }
-
-    footer {
-      font-size: 0.875rem;
-      color: #6b7280;
-      padding: 2rem;
-    }
-
-    .recording-controls {
-      margin: 1rem 0;
-    }
-
-    .recording-controls button {
-      padding: 0.5rem 1rem;
-      margin: 0 0.5rem;
-      border-radius: 0.25rem;
-      font-weight: bold;
-      border: none;
-      cursor: pointer;
-    }
-
-    .recording-controls .start {
-      background-color: #3b82f6;
-      color: white;
-    }
-
-    .recording-controls .stop {
-      background-color: #9ca3af;
-      color: white;
-    }
-
-    #summary {
-      background-color: #fff;
-      margin: 1rem auto;
-      max-width: 500px;
-      padding: 1rem;
-      border-radius: 0.5rem;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-      min-height: 80px;
-    }
-  </style>
-</head>
-<body>
-
-  <header>
-    <h1>Sumwise</h1>
-    <p>Turn voice notes into clear, AI-generated summaries — instantly.</p>
-    <a class="button" href="#">Join the Waitlist</a>
-  </header>
-
-  <section style="background-color:#f3f4f6;">
-    <h2 class="section-title">How It Works</h2>
-    <div class="card"><strong>1.</strong> Upload or record audio.</div>
-    <div class="card"><strong>2.</strong> AI transcribes and summarizes it.</div>
-    <div class="card"><strong>3.</strong> Receive a clean, structured summary in seconds.</div>
-  </section>
-
-  <section>
-    <h2 class="section-title">Pricing</h2>
-    <div class="card"><strong>Free –</strong> Upload up to 3 audio notes per month.</div>
-    <div class="card"><strong>Pro –</strong> $9/month for unlimited summaries and faster processing.</div>
-  </section>
-
-  <section>
-    <h2 class="section-title">Try It Now</h2>
-    <div class="card">
-      <label><strong>Upload Audio</strong></label><br />
-      <input type="file" id="fileInput" accept="audio/*" />
-      <div class="recording-controls">
-        <button class="start" id="startBtn">Start Recording</button>
-        <button class="stop" id="stopBtn" disabled>Stop</button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sumwise – AI Voice Note Summarizer</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="https://emojiapi.dev/api/v1/brain/48.png" />
+  </head>
+  <body class="bg-gray-50 text-gray-800 font-sans">
+    <!-- Header -->
+    <header class="text-center py-10">
+      <div class="text-4xl font-bold flex justify-center items-center space-x-2">
+        <span>🧠</span><span>Sumwise</span>
       </div>
-      <div id="summary">AI-generated summary will appear here.</div>
-    </div>
-  </section>
+      <p class="mt-4 text-lg text-gray-600">
+        Your voice notes, instantly summarized by AI.
+      </p>
+      <a
+        href="#try"
+        class="mt-6 inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-full transition"
+      >
+        Try It Free
+      </a>
+    </header>
 
-  <footer>
-    © 2025 Sumwise. All rights reserved.
-  </footer>
+    <!-- How It Works -->
+    <section class="bg-white py-12">
+      <div class="max-w-2xl mx-auto text-center">
+        <h2 class="text-2xl font-bold mb-6">How It Works</h2>
+        <ol class="space-y-4 text-left">
+          <li class="bg-gray-100 px-4 py-3 rounded shadow-sm">
+            <strong>1.</strong> Upload or record your voice note.
+          </li>
+          <li class="bg-gray-100 px-4 py-3 rounded shadow-sm">
+            <strong>2.</strong> AI transcribes and summarizes it.
+          </li>
+          <li class="bg-gray-100 px-4 py-3 rounded shadow-sm">
+            <strong>3.</strong> Get your clear, structured summary instantly.
+          </li>
+        </ol>
+      </div>
+    </section>
 
-  <script>
-    let mediaRecorder;
-    let audioChunks = [];
+    <!-- Pricing -->
+    <section class="py-12 bg-gray-50">
+      <div class="max-w-2xl mx-auto text-center">
+        <h2 class="text-2xl font-bold mb-6">Pricing</h2>
+        <div class="space-y-4">
+          <div class="bg-white p-4 rounded shadow-sm">
+            <strong>Free –</strong> Upload up to 3 audio notes/month.
+          </div>
+          <div class="bg-white p-4 rounded shadow-sm">
+            <strong>Pro –</strong> $9/month for unlimited summaries + priority speed.
+          </div>
+        </div>
+      </div>
+    </section>
 
-    const startBtn = document.getElementById('startBtn');
-    const stopBtn = document.getElementById('stopBtn');
-    const fileInput = document.getElementById('fileInput');
-    const summaryEl = document.getElementById('summary');
+    <!-- Try It Now -->
+    <section id="try" class="py-12 bg-white">
+      <div class="max-w-xl mx-auto text-center">
+        <h2 class="text-2xl font-bold mb-4">Try It Now</h2>
+        <p class="mb-4 font-semibold">Upload Audio</p>
 
-    startBtn.addEventListener('click', async () => {
-      summaryEl.innerText = "Recording...";
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      mediaRecorder = new MediaRecorder(stream);
-      audioChunks = [];
+        <input
+          id="audioFile"
+          type="file"
+          accept="audio/*"
+          class="mb-4 block mx-auto"
+        />
 
-      mediaRecorder.addEventListener("dataavailable", event => {
-        audioChunks.push(event.data);
-      });
+        <div class="mb-4">
+          <button
+            id="startBtn"
+            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded mr-2"
+          >
+            Start Recording
+          </button>
+          <button
+            id="stopBtn"
+            class="bg-gray-400 hover:bg-gray-500 text-white font-semibold px-4 py-2 rounded"
+            disabled
+          >
+            Stop
+          </button>
+        </div>
 
-      mediaRecorder.addEventListener("stop", () => {
-        const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
-        sendAudio(audioBlob);
-      });
+        <p id="status" class="text-sm text-gray-600 mb-2">Ready to record...</p>
+        <div
+          id="summaryResult"
+          class="mt-4 bg-gray-100 p-4 rounded text-left shadow-sm text-sm"
+        >
+          AI-generated summary will appear here.
+        </div>
+      </div>
+    </section>
 
-      mediaRecorder.start();
-      startBtn.disabled = true;
-      stopBtn.disabled = false;
-    });
+    <!-- Footer -->
+    <footer class="text-center py-6 text-gray-400 text-sm">
+      © 2025 Sumwise. Built with 💙 for clarity.
+    </footer>
 
-    stopBtn.addEventListener('click', () => {
-      mediaRecorder.stop();
-      startBtn.disabled = false;
-      stopBtn.disabled = true;
-    });
+    <!-- Script -->
+    <script>
+      const startBtn = document.getElementById("startBtn");
+      const stopBtn = document.getElementById("stopBtn");
+      const audioInput = document.getElementById("audioFile");
+      const summaryResult = document.getElementById("summaryResult");
+      const statusText = document.getElementById("status");
 
-    fileInput.addEventListener('change', () => {
-      const file = fileInput.files[0];
-      if (file) {
-        sendAudio(file);
-      }
-    });
+      let mediaRecorder;
+      let audioChunks = [];
 
-    async function sendAudio(audioBlob) {
-      summaryEl.innerText = "Processing...";
-      try {
-        const response = await fetch('/api/transcribe', {
-          method: 'POST',
-          body: audioBlob
+      startBtn.onclick = async () => {
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+          mediaRecorder = new MediaRecorder(stream);
+          audioChunks = [];
+
+          mediaRecorder.ondataavailable = e => {
+            if (e.data.size > 0) audioChunks.push(e.data);
+          };
+
+          mediaRecorder.onstop = async () => {
+            const audioBlob = new Blob(audioChunks, { type: "audio/webm" });
+            const formData = new FormData();
+            formData.append("file", audioBlob, "recording.webm");
+
+            statusText.textContent = "Uploading and summarizing...";
+            const res = await fetch("/api/transcribe", {
+              method: "POST",
+              body: formData,
+            });
+
+            const result = await res.json();
+            summaryResult.textContent = result.summary || "No summary returned.";
+            statusText.textContent = "Done!";
+          };
+
+          mediaRecorder.start();
+          statusText.textContent = "Recording...";
+          startBtn.disabled = true;
+          stopBtn.disabled = false;
+        } catch (err) {
+          alert("Microphone access denied.");
+          console.error(err);
+        }
+      };
+
+      stopBtn.onclick = () => {
+        if (mediaRecorder && mediaRecorder.state !== "inactive") {
+          mediaRecorder.stop();
+          statusText.textContent = "Processing...";
+        }
+        startBtn.disabled = false;
+        stopBtn.disabled = true;
+      };
+
+      audioInput.onchange = async () => {
+        const file = audioInput.files[0];
+        if (!file) return;
+
+        const formData = new FormData();
+        formData.append("file", file);
+
+        statusText.textContent = "Uploading and summarizing...";
+        const res = await fetch("/api/transcribe", {
+          method: "POST",
+          body: formData,
         });
 
-        const data = await response.json();
-        summaryEl.innerText = data.summary || 'No summary returned.';
-      } catch (err) {
-        console.error(err);
-        summaryEl.innerText = 'Error: ' + err.message;
-      }
-    }
-  </script>
-</body>
+        const result = await res.json();
+        summaryResult.textContent = result.summary || "No summary returned.";
+        statusText.textContent = "Done!";
+      };
+    </script>
+  </body>
 </html>
